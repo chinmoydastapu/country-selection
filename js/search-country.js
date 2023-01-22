@@ -7,6 +7,9 @@ function searchCountry() {
 
     const countryName = document.getElementById("country-field").value;
 
+    // Starting the loader
+    document.getElementById("loader").classList.remove('hidden');
+
     fetch(`https://restcountries.com/v3.1/name/${countryName}`)
         .then(res => res.json())
         .then(data => showDetails(data));
@@ -27,6 +30,9 @@ function showDetails(countries) {
         </div>
         `;
         countryContainer.classList.add('border');
+
+        // Stopping the loader
+        document.getElementById("loader").classList.add('hidden');
     } else {
         for (const country of countries) {
             const div = document.createElement("div");
@@ -45,5 +51,8 @@ function showDetails(countries) {
             div.classList.add('w-3/4', 'mx-auto', 'my-10', 'card', 'lg:card-side', 'bg-base-100', 'shadow-xl', 'border');
             countriesContainer.appendChild(div);
         }
+        
+        // Stopping the loader
+        document.getElementById("loader").classList.add('hidden');
     }
 }
